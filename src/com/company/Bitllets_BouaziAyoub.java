@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Scanner;
+
 // El programa proporciona una experiencia interactiva para simular la compra de billetes de transporte público,
 // ofreciendo flexibilidad en la elección del tipo de billete y la zona, y calculando de manera precisa los costos
 // asociados con cada compra.
@@ -222,29 +223,24 @@ public class Bitllets_BouaziAyoub {
 
                     System.out.println("Has comprado" + " " + num_opc + " " + "billetes");
 
-                    System.out.println("Tienes que pagar" + total + "€");
+                    System.out.println("Tienes que pagar " + total + "€");
                     do {
                         System.out.println("Introduce monedas o billetes válidas de EURO:");
                         pag = scan.nextInt();
                         scan.nextLine();
-                        if (pag > 50 || pag < 0) {
+                        if (pag < total) {
+                            total = total - pag;
                             System.out.println(
-                                    "has introducido" + " " + 0.00f + "€" + " " + "le queda por pagar" + total + "€");
-                            // System.out.println("Introduce monedas o billetes válidas de EURO:");
+                                    "has introducido" + " " + pag + "€" + " " + "le queda por pagar " + total + "€");
+                        } else if (pag > total) {
+                            total = pag - total;
+                            System.out.println("El cambio es " + total + "€    ");
+                            break;
+                        } else if (pag == total) {
+                            System.out.println("se ha pagado ya, no es nesesario dar cambio!");
                         }
-                    } while (pag > 50 || pag < 0);
-                    cambio = pag - total;
-                    faltante = total - pag;
 
-                    if (cambio < 0) {
-                        System.out.println("te falta para pagar " + faltante + "€");
-                        System.out.println("");
-                    } else if (cambio == 0) {
-                        System.out.println("se ha pagado ya, no es nesesario dar cambio!");
-                    } else if (cambio > 0) {
-                        System.out.println("el cambio es " + cambio + "€");
-                    }
-
+                    } while (total >= 0);
                 }
 
             }
